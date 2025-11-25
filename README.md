@@ -19,7 +19,7 @@ This repository contains two separate assignments demonstrating **concurrent pro
 ### Steps
 1. Clone the repository:  git clone https://github.com/DeepakMin2/Intuit_TakeHome_Assesment.git
 2.  **Open the project in your IDE:**
-    * *In Eclipse:* `File` → `Import` → `Existing Java Project`.
+    * *In Eclipse:* `File` → `Import` → `Existing Java Project` → `Project Folder`.
 3.  **Run Assignment 1 (Producer-Consumer):**
     * Execute `ProducerConsumerDemo.java` located in `assignment1/core/`.
     * **Observe:** The output demonstrates the Producer and Consumer threads interacting through the shared queue, pausing when the queue is full or empty.
