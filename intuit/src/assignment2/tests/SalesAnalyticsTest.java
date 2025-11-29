@@ -25,12 +25,12 @@ class SalesAnalyticsTest {
         analytics = new SalesAnalytics();
 
         records = List.of(
-                new SaleRecord(LocalDate.of(2024, 1, 1), "North", "Laptop", 2, 1200),
-                new SaleRecord(LocalDate.of(2024, 1, 1), "North", "Mouse", 10, 25),
-                new SaleRecord(LocalDate.of(2024, 1, 2), "South", "Monitor", 3, 180),
-                new SaleRecord(LocalDate.of(2024, 1, 2), "East", "Keyboard", 5, 45),
-                new SaleRecord(LocalDate.of(2024, 1, 3), "North", "Laptop", 1, 1180),
-                new SaleRecord(LocalDate.of(2024, 1, 3), "South", "Mouse", 4, 26)
+                new SaleRecord(LocalDate.of(2024, 1, 1), "Laptop", 2, 1200),
+                new SaleRecord(LocalDate.of(2024, 1, 1), "Mouse", 10, 25),
+                new SaleRecord(LocalDate.of(2024, 1, 2), "Monitor", 3, 180),
+                new SaleRecord(LocalDate.of(2024, 1, 2), "Keyboard", 5, 45),
+                new SaleRecord(LocalDate.of(2024, 1, 3), "Laptop", 1, 1180),
+                new SaleRecord(LocalDate.of(2024, 1, 3), "Mouse", 4, 26)
         );
     }
 
@@ -65,22 +65,6 @@ class SalesAnalyticsTest {
         assertEquals(5, result.get("Keyboard"));
     }
 
-    // ----------------------------------------------------------
-    // TEST: revenueByRegion()
-    // ----------------------------------------------------------
-    @Test
-    @DisplayName("Given sales data, when grouping by region, then revenue should aggregate correctly")
-    void testRevenueByRegion() {
-        Map<String, Double> result = analytics.revenueByRegion(records);
-
-        double northRevenue = (2 * 1200) + (10 * 25) + (1 * 1180);
-        double southRevenue = (3 * 180) + (4 * 26);
-        double eastRevenue = 5 * 45;
-
-        assertEquals(northRevenue, result.get("North"));
-        assertEquals(southRevenue, result.get("South"));
-        assertEquals(eastRevenue, result.get("East"));
-    }
 
     // ----------------------------------------------------------
     // TEST: topSellingProduct()
@@ -133,17 +117,6 @@ class SalesAnalyticsTest {
         assertEquals((1 * 1180) + (4 * 26), result.get(LocalDate.of(2024, 1, 3)));
     }
 
-    // ----------------------------------------------------------
-    // TEST: filterByRegion()
-    // ----------------------------------------------------------
-    @Test
-    @DisplayName("Given sales data, when filtering by region, then only region-matching records should return")
-    void testFilterByRegion() {
-        List<SaleRecord> northRecords = analytics.filterByRegion(records, "North");
-
-        assertEquals(3, northRecords.size());
-        assertTrue(northRecords.stream().allMatch(r -> r.getRegion().equals("North")));
-    }
 
     // ----------------------------------------------------------
     // TEST: filterByDateRange()

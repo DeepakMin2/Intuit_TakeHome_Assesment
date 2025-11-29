@@ -13,27 +13,27 @@ public class App {
 
         double revenue = analytics.totalRevenue(records);
         Map<String, Integer> unitsByProduct = analytics.totalUnitsByProduct(records);
-        Map<String, Double> revenueByRegion = analytics.revenueByRegion(records);
         
-        System.out.println("=== Sales Analytics ===");
+        System.out.println("******* Sales Analytics *******");
         System.out.println("Total Revenue: $" + revenue);
-        System.out.println("Units Sold by Product: " + unitsByProduct);
-        System.out.println("Revenue by Region: " + revenueByRegion);
-
+        System.out.println(" ");
+        System.out.println("Units Sold per Product: " + unitsByProduct);
+        System.out.println(" ");
         System.out.println("Average Unit Price per Product: " + analytics.averageUnitPriceByProduct(records));
+        
+        System.out.println(" ");
+        List<SaleRecord> highSales = analytics.salesAboveAmount(records, 300);
+        System.out.println("Sales above $300: " + highSales);
 
-        List<SaleRecord> highSales = analytics.salesAboveAmount(records, 500);
-        System.out.println("Sales above $500: " + highSales);
-
+        System.out.println(" ");
         System.out.println("Revenue by Date: " + analytics.revenueByDate(records));
 
-        System.out.println("Only North Region:");
-        analytics.filterByRegion(records, "North").forEach(System.out::println);
-
+        System.out.println(" ");
         System.out.println("Sales Jan 1 to Jan 3:");
         analytics.filterByDateRange(records, LocalDate.parse("2024-01-01"), LocalDate.parse("2024-01-03"))
                 .forEach(System.out::println);
 
+        System.out.println(" ");
         analytics.topSellingProduct(records)
                 .ifPresent(product -> System.out.println("Top Selling Product: " + product));
     }
